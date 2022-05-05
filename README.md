@@ -1,15 +1,19 @@
 # crypto-dashboard
 
+## Website
+https://stephen-c-crypto-dashboard.herokuapp.com
+
+
 ## Data Source
 API calls to [CoinCap](https://docs.coincap.io)
 
 
 ## Local Setup
 
-In the server folder, install dependencies:
+In the folder, install dependencies:
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 

@@ -1,7 +1,8 @@
 import pandas as pd
 import plotly.graph_objects as go
-from dash import html, dcc
+from dash import html, dcc, Input, Output
 import dash_bootstrap_components as dbc
+from dash.exceptions import PreventUpdate
 
 from overview_data import get_crypto_id_list
 from util import get_data_from_API, get_local_time
@@ -81,3 +82,28 @@ candlestick_tab_content = [[
 
     )
 ]]
+
+
+def candlestick_callbacks(app):
+    @ app.callback(
+        [Output(component_id='candlestick-plot', component_property='children'),
+         ],
+        [Input(component_id='candlestick-base-id', component_property='value'),
+         Input(component_id='candlestick-quote-id', component_property='value'),
+         Input(component_id='candlestick-interval', component_property='value'),
+         ], prevent_initial_call=True
+    )
+    def render_candlestick_fig(base_id, quote_id, interval):
+        print('candlestick-base_id: ', base_id,
+              'candlestick-quote-id :', quote_id,
+              'candlestick-interval: ', interval)
+        if base_id is None:
+            raise PreventUpdate
+
+        if quote_id is None:
+            raise PreventUpdate
+
+        if interval is None:
+            raise PreventUpdate
+
+        return [dcc.Graph(figure=get_candlestick_fig(base_id, quote_id, interval))]

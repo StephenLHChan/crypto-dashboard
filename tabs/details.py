@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly.express as px
-from dash import html, dcc
+from dash import html, dcc, Input, Output
+from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 
 from overview_data import get_crypto_id_list
@@ -55,3 +56,35 @@ crypto_details_tab_content = [[
         ],
     ),
 ]]
+
+
+def details_callbacks(app):
+    @app.callback(
+        [Output(component_id='details-display', component_property='children'),
+         Output(component_id='details-line-plot',
+                component_property='children')
+
+         ],
+        [Input(component_id='details_crypto_id', component_property='value'),
+         ], prevent_initial_call=True
+    )
+    def render_details(crypto_id):
+        print('details_crypto_id', crypto_id)
+        if crypto_id is None:
+            raise PreventUpdate
+
+        return [
+            dbc.Table(
+                [
+                    html.Thead(
+                        html.Tr([html.Th("Fields"), html.Th("Details")]))
+                ] +
+                [
+                    html.Tbody(
+                        [html.Tr([
+                            html.Td(key),
+                            html.Td(value)])for key, value in get_crypto_details(crypto_id).items()
+                         ]
+                    )]
+            )
+        ], [dcc.Graph(figure=get_details_line_fig(crypto_id))]

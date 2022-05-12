@@ -1,5 +1,6 @@
 import pandas as pd
-from dash import html, dcc
+from dash import html, dcc, Input, Output
+from dash.exceptions import PreventUpdate
 import plotly.express as px
 import dash_bootstrap_components as dbc
 
@@ -66,3 +67,27 @@ correlation_price_change_volume_tab_cantent = [[
 
     )
 ]]
+
+
+def correlation_callbacks(app):
+    @ app.callback(
+        [Output(component_id='correlation-plot', component_property='children'),
+         ],
+        [Input(component_id='correlation-base-id', component_property='value'),
+         Input(component_id='correlation-quote-id',
+               component_property='value'),
+         Input(component_id='correlation-interval',
+               component_property='value'),
+         ], prevent_initial_call=True
+    )
+    def render_correlation(base_id, quote_id, interval):
+        if base_id is None:
+            raise PreventUpdate
+
+        if quote_id is None:
+            raise PreventUpdate
+
+        if interval is None:
+            raise PreventUpdate
+
+        return [dcc.Graph(figure=get_correlation_fig(base_id, quote_id, interval))]

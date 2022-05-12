@@ -1,7 +1,8 @@
 from datetime import datetime
 import pandas as pd
 import plotly.express as px
-from dash import html, dcc
+from dash import html, dcc, Input, Output
+from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 
 from util import get_data_from_API
@@ -72,3 +73,22 @@ volume_daysInWeek_tab_content = [[
         ],
     ),
 ]]
+
+
+def volumn_callbacks(app):
+    @ app.callback(
+        [Output(component_id='volume_daysInWeek-plot', component_property='children'),
+         ],
+        [Input(component_id='volume_daysInWeek-base-id', component_property='value'),
+         Input(component_id='volume_daysInWeek-quote-id',
+               component_property='value'),
+         ], prevent_initial_call=True
+    )
+    def render_volume_daysInWeek(base_id, quote_id):
+        if base_id is None:
+            raise PreventUpdate
+
+        if quote_id is None:
+            raise PreventUpdate
+
+        return [dcc.Graph(figure=get_volume_fig(base_id, quote_id))]

@@ -476,7 +476,9 @@
   /* Tables
   –––––––––––––––––––––––––––––––––––––––––––––––––– */
   table {
+    width: 100%;
     border-collapse: collapse;
+    padding: 20px;
   }
   
   th,

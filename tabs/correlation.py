@@ -2,7 +2,6 @@ import pandas as pd
 from dash import html, dcc, Input, Output
 from dash.exceptions import PreventUpdate
 import plotly.express as px
-import dash_bootstrap_components as dbc
 
 from overview_data import get_exchangeId_list, get_crypto_id_list
 from tabs.candlestick import get_candlestick_interval
@@ -38,21 +37,21 @@ def get_correlation_fig(base_id, quote_id, interval):
 
 
 correlation_price_change_volume_tab_cantent = [[
-    dbc.Label('Base ID :'),
+    html.Label(children='Base ID :'),
     dcc.Dropdown(
         id='correlation-base-id',
         options=[
             {'label': id, 'value': id} for id in get_crypto_id_list()
         ],
     ),
-    dbc.Label('Quote ID :'),
+    html.Label(children='Quote ID :'),
     dcc.Dropdown(
         id='correlation-quote-id',
         options=[
             {'label': id, 'value': id} for id in get_crypto_id_list()
         ],
     ),
-    dbc.Label('Interval :'),
+    html.Label(children='Interval :'),
     dcc.Dropdown(
         id='correlation-interval',
         options=[

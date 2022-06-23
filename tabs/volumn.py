@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 from dash import html, dcc, Input, Output
 from dash.exceptions import PreventUpdate
-import dash_bootstrap_components as dbc
 
 from util import get_data_from_API
 from overview_data import get_exchangeId_list, get_crypto_id_list
@@ -52,14 +51,14 @@ def get_volume_fig(base_id, quote_id):
 
 
 volume_daysInWeek_tab_content = [[
-    dbc.Label('Base ID :'),
+    html.Label('Base ID :'),
     dcc.Dropdown(
         id='volume_daysInWeek-base-id',
         options=[
             {'label': id, 'value': id} for id in get_crypto_id_list()
         ],
     ),
-    dbc.Label('Quote ID :'),
+    html.Label('Quote ID :'),
     dcc.Dropdown(
         id='volume_daysInWeek-quote-id',
         options=[

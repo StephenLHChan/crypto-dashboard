@@ -1,7 +1,6 @@
 import pandas as pd
 import plotly.graph_objects as go
 from dash import html, dcc, Input, Output
-import dash_bootstrap_components as dbc
 from dash.exceptions import PreventUpdate
 
 from overview_data import get_crypto_id_list
@@ -53,21 +52,21 @@ def get_candlestick_interval():
 
 
 candlestick_tab_content = [[
-    dbc.Label('Base ID :'),
+    html.Label(children='Base ID :'),
     dcc.Dropdown(
         id='candlestick-base-id',
         options=[
             {'label': id, 'value': id} for id in get_crypto_id_list()
         ],
     ),
-    dbc.Label('Quote ID :'),
+    html.Label(children='Quote ID :'),
     dcc.Dropdown(
         id='candlestick-quote-id',
         options=[
             {'label': id, 'value': id} for id in get_crypto_id_list()
         ],
     ),
-    dbc.Label('Interval :'),
+    html.Label(children='Interval :'),
     dcc.Dropdown(
         id='candlestick-interval',
         options=[

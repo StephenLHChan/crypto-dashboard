@@ -1,11 +1,9 @@
 import dash
-import dash_bootstrap_components as dbc
 
 from layout import layout
 from callbacks import register_callbacks
 
-app = dash.Dash(external_stylesheets=[dbc.themes.SPACELAB, dbc.icons.BOOTSTRAP],
-                suppress_callback_exceptions=True)
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
 server = app.server
 
 app.title = "Crypto Dashboard"

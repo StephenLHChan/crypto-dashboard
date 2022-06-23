@@ -1,80 +1,110 @@
 from dash import html, dcc, Input, Output
-import dash_bootstrap_components as dbc
 from tabs.candlestick import candlestick_tab_content
 from tabs.marketCap import marketCap_tab_content
 from tabs.details import crypto_details_tab_content
 from tabs.volumn import volume_daysInWeek_tab_content
 from tabs.correlation import correlation_price_change_volume_tab_cantent
 
-layout = dbc.Container(html.Div(
-    children=[
-        html.H1('Crypto Dashboard',
-                className="display-4"
-                ),
-        html.Hr(),
 
-        dbc.Tabs(
-            [
-                dbc.Tab(label="Market Cap Overview", tab_id="market-cap"),
-                dbc.Tab(label="Crypto Details", tab_id="crypto-details"),
-                dbc.Tab(label="Candlestick Chart", tab_id="candlestick"),
-                dbc.Tab(label="Volume of days in week",
-                        tab_id="volume-daysInWeek"),
-                dbc.Tab(label="Correlation between Price change and Volume",
-                        tab_id="correlation-price_change-volume")
-            ],
-            id="tabs",
-            active_tab="market-cap",
-        ),
-        dcc.Loading(
+def build_banner():
+    return html.Div(
+        id="banner",
+        className="banner",
+        children=[
+            html.Div(
+                id="banner-text",
+                children=[html.H5('Crypto Dashboard')],
+            )
+
+        ]
+    )
+
+
+def build_tabs():
+    return html.Div(
+        id="tabs",
+        className="tabs",
+        children=[
+            dcc.Tabs(
+                id="app-tabs",
+                className="custom-tabs",
+                value="market-cap",
+                children=[
+                    dcc.Tab(
+                        id="market-cap-tab",
+                        label="Market Cap Overview",
+                        value="market-cap",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+                    ),
+                    dcc.Tab(
+                        id="crypto-details-tab",
+                        label="Crypto Details",
+                        value="crypto-details",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+                    ),
+                    dcc.Tab(
+                        id="candlestick-tab",
+                        label="Candlestick Chart",
+                        value="candlestick",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+                    ),
+                    dcc.Tab(
+                        id="volume-daysInWeek-tab",
+                        label="Volume of days in week",
+                        value="volume-daysInWeek",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+
+                    ),
+                    dcc.Tab(
+                        id="correlation-price_change-volume-tab",
+                        label="Correlation",
+                        value="correlation-price_change-volume",
+                        className="custom-tab",
+                        selected_className="custom-tab--selected",
+
+                    )
+                ],
+
+            )
+        ]
+    )
+
+
+layout = html.Div(
+    id="big-app-container",
+    children=[
+        build_banner(),
+        html.Div(
+            id="app-container",
             children=[
-                html.Div(id="tab-content", className="p-4 d-flex flex-column min-vh-100")]
-        ),
-        html.Footer(
-            children=[
-                html.Section(
+                build_tabs(),
+                dcc.Loading(
                     children=[
-                        html.Div(
-                            'Get connected with me on social networks:', className="me-5 d-none d-lg-block"
-                        ),
-                        html.Div(
-                            [
-                                html.A(
-                                    html.I(className='bi bi-github'),
-                                    href='https://github.com/StephenLHChan',
-                                    className="me-4 text-reset"
-                                ),
-                                html.A(
-                                    html.I(className='bi bi-linkedin'),
-                                    href='https://www.linkedin.com/in/stephenlhc',
-                                    className="me-4 text-reset"
-                                )
-                            ], className="me-5 d-none d-lg-block"
-                        )
-                    ], className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
-                )
-            ], className="text-center text-lg-start bg-light text-muted mt-auto")
+                        html.Div(id="app-content")])
+            ]
+        )
     ])
-)
 
 
 def layout_callbacks(app):
-    @app.callback(
-        [Output("tab-content", "children"),
+    @ app.callback(
+        [Output("app-content", "children"),
          ],
-        [Input("tabs", "active_tab"),
+        [Input("app-tabs", "value"),
          ]
     )
     def render_tab_content(active_tab):
-        if active_tab is not None:
-            if active_tab == "market-cap":
-                return marketCap_tab_content
-            elif active_tab == "candlestick":
-                return candlestick_tab_content
-            elif active_tab == "crypto-details":
-                return crypto_details_tab_content
-            elif active_tab == "volume-daysInWeek":
-                return volume_daysInWeek_tab_content
-            elif active_tab == "correlation-price_change-volume":
-                return correlation_price_change_volume_tab_cantent
-        return "No tab selected"
+        if active_tab == "market-cap":
+            return marketCap_tab_content
+        elif active_tab == "candlestick":
+            return candlestick_tab_content
+        elif active_tab == "crypto-details":
+            return crypto_details_tab_content
+        elif active_tab == "volume-daysInWeek":
+            return volume_daysInWeek_tab_content
+        elif active_tab == "correlation-price_change-volume":
+            return correlation_price_change_volume_tab_cantent

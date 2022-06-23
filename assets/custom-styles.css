@@ -140,6 +140,7 @@
     font-size: 14px;
     height: fit-content;
     cursor: pointer;
+    padding-bottom: 15px;
   }
   
   #market-cap-tab.custom-tab, 
@@ -160,18 +161,15 @@
     height: 18px;
   }
   
-  #market-cap-tab.custom-tab--selected, #crypto-details-tab.custom-tab--selected, #candlestick-tab.custom-tab--selected, #volume-daysInWeek-tab.custom-tab--selected, #correlation-price_change-volume-tab.custom-tab--selected {
+  #market-cap-tab.custom-tab--selected, 
+  #crypto-details-tab.custom-tab--selected, 
+  #candlestick-tab.custom-tab--selected, 
+  #volume-daysInWeek-tab.custom-tab--selected, 
+  #correlation-price_change-volume-tab.custom-tab--selected {
     border-bottom: #91dfd2 solid 4px !important;
   }
   
-  #market-cap-tab.custom-tab {
-    margin-right: 3px;
-  }
-  
-  #market-cap-tab.custom-tab {
-    margin-left: 3px;
-  }
-  
+
   .section-banner {
     color: darkgray;
     font-size: 1.5rem;
@@ -423,7 +421,6 @@
     margin: 1rem 2rem;
     max-width: 100%;
     width: 100%;
-    height: calc(100vh - 10rem - 1px);
   }
   
   #app-content {
@@ -469,117 +466,6 @@
     flex: 3 1;
     max-width: calc(75%);
     width: 70%;
-  }
-  
-  
-  /* Tab 2 Quick stats
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  #quick-stats {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    border-right: #1E2130 solid 0.8rem;
-    flex: 1 1;
-    padding: 2rem;
-    max-width: 25%;
-  }
-  
-  #operator-led {
-    width: 200px;
-  }
-  
-  #operator-led > div {
-    width: 80%;
-    margin: auto;
-  }
-  
-  #operator-led > div > div {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
-  
-  #operator-led > div > div svg:nth-child(1) {
-    margin-left: -1rem;
-  }
-  
-  #progress-gauge > div, #progress-gauge > div > div, #progress-gauge > div > div > div {
-    width: 100%;
-    text-align: center;
-  }
-  
-  #progress-gauge svg {
-    width: 80%;
-    height: auto;
-  }
-  
-  #progress-gauge > div > div > div > div {
-    color: white !important;
-  }
-  
-  /*pressure-gauge track*/
-  .eUJyCY .track {
-    stroke: #f4d44d !important;
-    stroke-width: 10;
-  }
-  
-  .eUJyCY .track.progress {
-    stroke: #fff3c5 !important;
-  }
-  
-  /* Tab 2 Specs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  #stop-button > div > button {
-    color: white !important;
-    background-color: #1d202d !important;
-    border: 1px solid #4B5460 !important;
-    border-radius: 4px;
-    height: 40px;
-    line-height: 40px;
-  }
-  
-  #stop-button > div > button:hover {
-    color: #91dfd2 !important;
-    border-color: white !important;
-    background-color: #1d202d !important;
-  }
-  
-  #card-1 P, #card-2 P {
-    margin: 2rem;
-    color: inherit;
-    font-weight: bold;
-    align-self: flex-start;
-  }
-  
-  #card-2 .scale, #card-2 .needle, #card-2 .needle-knob {
-    display: none !important;
-  }
-  
-  /* Tab 2 metric row
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  .metric-row-button {
-    border: none;
-    padding: 0px 0px;
-    color: #95969A;
-    font-size: 1rem;
-    letter-spacing: 0.02rem;
-  }
-  
-  .metric-row-button:hover {
-    border: none;
-    color: white !important;
-  }
-  
-  #metric-div {
-    padding: 1rem 2rem 1rem 1rem;
-  }
-  
-  #metric-rows {
-    overflow-y: scroll;
-    width: 100%;
-    height: 30rem;
   }
   
   /*

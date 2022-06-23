@@ -19,14 +19,15 @@ def generate_pie(df):
                 }
             ],
             "layout": {
-                "margin": dict(l=20, r=20, t=20, b=20),
+                "title": "Market Capacity Distribution of Cryptocurrency",
+                "margin": dict(l=20, r=20, t=80, b=20),
                 "showlegend": True,
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",
                 "font": {"color": "white"},
                 "autosize": True,
             },
-        }
+        },
     )
 
 

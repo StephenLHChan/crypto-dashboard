@@ -12,14 +12,29 @@ def get_crypto_details(crypto_id) -> dict:
     return get_data_from_API(url)
 
 
-def get_fig(df):
-    fig = px.line(
-        df,
-        x='date',
-        y='priceUsd',
-        title=''
+def generate_fig(df):
+    return dcc.Graph(
+        figure={
+            "data": [
+                {
+                    "x": df['date'],
+                    "y": df['priceUsd'],
+                    "type": "line",
+                    "marker": {"line": {"color": "white", "width": 1}},
+                    "hoverinfo": "values",
+                }
+            ],
+            "layout": {
+                "title": "Price (1 day interval)",
+                "margin": dict(l=50, r=20, t=80, b=50),
+                "showlegend": False,
+                "paper_bgcolor": "rgba(0,0,0,0)",
+                "plot_bgcolor": "rgba(0,0,0,0)",
+                "font": {"color": "white"},
+                "autosize": True,
+            },
+        },
     )
-    return fig
 
 
 def get_display_df(crypto_id):
@@ -35,7 +50,7 @@ def get_display_df(crypto_id):
 
 
 def get_details_line_fig(crypto_id):
-    return get_fig(get_display_df(crypto_id))
+    return generate_fig(get_display_df(crypto_id))
 
 
 crypto_details_tab_content = [[
@@ -86,4 +101,4 @@ def details_callbacks(app):
                          ]
                     )]
             )
-        ], [dcc.Graph(figure=get_details_line_fig(crypto_id))]
+        ], [get_details_line_fig(crypto_id)]

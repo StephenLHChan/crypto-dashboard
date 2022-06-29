@@ -35,7 +35,7 @@ def generate_table(df):
     return html.Table(
         [
             html.Thead(
-                html.Tr([html.Th("Rank"), html.Th("Name"), html.Th("Market Cap in USD")]))
+                html.Tr([html.Th("Rank"), html.Th("Name"), html.Th("Market Capacity in USD")]))
         ] +
         [
             html.Tbody(

@@ -12,7 +12,7 @@ def get_crypto_details(crypto_id) -> dict:
     return get_data_from_API(url)
 
 
-def generate_fig(df):
+def generate_fig(df, crypto_id):
     return dcc.Graph(
         figure={
             "data": [
@@ -25,7 +25,7 @@ def generate_fig(df):
                 }
             ],
             "layout": {
-                "title": "Price (1 day interval)",
+                "title": "Price of " + crypto_id + " (1 day interval)",
                 "margin": dict(l=50, r=20, t=80, b=50),
                 "showlegend": False,
                 "paper_bgcolor": "rgba(0,0,0,0)",
@@ -47,10 +47,6 @@ def get_display_df(crypto_id):
     df['priceUsd'] = df['priceUsd'].astype('float')
     df['date'] = pd.to_datetime(df['date']).dt.tz_convert(None)
     return df
-
-
-def get_details_line_fig(crypto_id):
-    return generate_fig(get_display_df(crypto_id))
 
 
 crypto_details_tab_content = [[
@@ -84,6 +80,7 @@ def details_callbacks(app):
     )
     def render_details(crypto_id):
         print('details_crypto_id', crypto_id)
+        df = get_display_df(crypto_id)
         if crypto_id is None:
             raise PreventUpdate
 
@@ -101,4 +98,4 @@ def details_callbacks(app):
                          ]
                     )]
             )
-        ], [get_details_line_fig(crypto_id)]
+        ], [generate_fig(df, crypto_id)]
